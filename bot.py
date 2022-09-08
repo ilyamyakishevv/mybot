@@ -23,10 +23,10 @@ def talk_to_me(update, context):
 def planet_func(update, context): 
     print("/planet just used")
     get_planet = update.message.text.split()
-    planet = get_planet[1]
+    planet = get_planet[1].capitalize()
     print("User choose", planet)
-    for_ephem = planets.get(planet)
-    if for_ephem != None:
+    planet_for_cons = planets.get(planet)
+    if planet_for_cons != None:
         current_constellation = ephem.constellation(planets[planet](today))[1]
         update.message.reply_text(f"Corrent constellation of {planet} is {current_constellation}")
     else: 
