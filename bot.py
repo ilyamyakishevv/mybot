@@ -26,7 +26,7 @@ def planet_func(update, context):
     if planet:
         try: 
             current_constellation = ephem.constellation(getattr(ephem, planet)(today))[1]
-            update.message.reply_text(f"Corrent constellation of {planet} is {current_constellation}")
+            update.message.reply_text(f"Current constellation of {planet} is {current_constellation}")
         except AttributeError: 
             update.message.reply_text("Please enter a correct planet")
 
