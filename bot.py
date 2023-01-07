@@ -3,17 +3,20 @@ import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import settings 
 import ephem
-from random import randint
+from glob import glob
+from random import randint, choice
 
 logging.basicConfig(filename='bot.log', level=logging.INFO)
 
 today = datetime.now()
 
+
 def greet_user(update, context): 
     print('/start just used')
     update.message.reply_text("""Hello! You just run my first learn bot! Try it and enjoy!
 You can use /planet command. Type /planet and planet what you want. For example /planet Mars.
-Now bot can play with you in a simple game try it! use /guess 10 (where 10 is your number)""")
+Now bot can play with you in a simple game try it! use /guess 10 (where 10 is your number)
+Bot can send you random cat image, use /cat for try it!""")
 
 
 def talk_to_me(update, context):
@@ -58,16 +61,25 @@ def play_numbers(user_number):
     return message
 
 
+def send_cat_image(update, context): 
+    images = glob('images/cat*.jp*g')
+    image_to_send = choice(images)
+    chat_id = update.effective_chat.id
+    context.bot.send_photo(chat_id=chat_id, photo=open(image_to_send, 'rb'))
+
+
 def main():
     mybot = Updater(settings.API_KEY, use_context=True)
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler('start', greet_user))
     dp.add_handler(CommandHandler('planet', planet_func))
     dp.add_handler(CommandHandler('guess', game_func))
+    dp.add_handler(CommandHandler('cat', send_cat_image))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
     logging.info('Bot starts')
     mybot.start_polling()
     mybot.idle()
+
 
 if __name__ == '__main__':
     main()
