@@ -16,7 +16,7 @@ def greet_user(update, context):
     update.message.reply_text("""Hello! You just run my first learn bot! Try it and enjoy!
 You can use /planet command. Type /planet and planet what you want. For example /planet Mars.
 Now bot can play with you in a simple game try it! use /guess 10 (where 10 is your number)
-Bot can send you random cat image, use /cat for try it and enjoy!""")
+Bot can send you random cat image, use /cat for try it and enjoy! :)""")
 
 
 def talk_to_me(update, context):
