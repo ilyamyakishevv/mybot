@@ -1,9 +1,10 @@
-from datetime import datetime, date, time
-import logging
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-import settings 
+from datetime import datetime
+from emoji import emojize
 import ephem
 from glob import glob
+import logging
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+import settings
 from random import randint, choice
 
 logging.basicConfig(filename='bot.log', level=logging.INFO)
@@ -13,10 +14,10 @@ today = datetime.now()
 
 def greet_user(update, context): 
     print('/start just used')
-    update.message.reply_text("""Hello! You just run my first learn bot! Try it and enjoy!
+    update.message.reply_text(emojize("""Hello :blush:! You just run my first learn bot! Try it and enjoy!
 You can use /planet command. Type /planet and planet what you want. For example /planet Mars.
 Now bot can play with you in a simple game try it! use /guess 10 (where 10 is your number)
-Bot can send you random cat image, use /cat for try it and enjoy! :)""")
+Bot can send you random cat image :cat:, use /cat for try it and enjoy! :)""", language='alias'))
 
 
 def talk_to_me(update, context):
